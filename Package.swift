@@ -5,66 +5,44 @@ let package = Package(
     name: "FluctMediation",
     products: [
         .library(
-            name: "FluctSDK",
-            targets: ["FluctSDK", "FluctSDKResources"]
-        ),
-        .library(
-            name: "AppLovinSDK",
-            targets: ["AppLovinSDK", "AppLovinSDKResources"]
-        ),
-        .library(
-            name: "Maio",
-            targets: ["Maio"]
-        ),
-        .library(
-            name: "NendAd",
-            targets: ["NendAd", "NendAdResource"]
-        ),
-        .library(
-            name: "UnityAds",
-            targets: ["UnityAds"]
+            name: "FluctMediation",
+            targets: ["FluctMediation"]
         )
     ],
     targets: [
         .binaryTarget(
             name: "FluctSDK",
-            path: "./FluctSDK.xcframework"
+            path: "FluctSDK.xcframework"
         ),
         .binaryTarget(
             name: "AppLovinSDK",
-            path: "./AppLovinSDK.xcframework"
+            path: "AppLovinSDK.xcframework"
         ),
         .binaryTarget(
             name: "Maio",
-            path: "./Maio.xcframework"
+            path: "Maio.xcframework"
         ),
         .binaryTarget(
             name: "NendAd",
-            path: "./NendAd.xcframework"
+            path: "NendAd.xcframework"
         ),
         .binaryTarget(
             name: "UnityAds",
-            path: "./UnityAds.xcframework"
+            path: "UnityAds.xcframework"
         ),
         .target(
-            name: "FluctSDKResources",
-            dependencies: [],
+            name: "FluctMediation",
+            dependencies: [
+                .target(name: "FluctSDK"),
+                .target(name: "AppLovinSDK"),
+                .target(name: "Maio"),
+                .target(name: "NendAd"),
+                .target(name: "UnityAds")
+            ],
             resources: [
-                .process("./FluctSDKResources.bundle")
-            ]
-        ),
-        .target(
-            name: "AppLovinSDKResources",
-            dependencies: [],
-            resources: [
-                .process("./AppLovinSDKResources.bundle")
-            ]
-        ),
-        .target(
-            name: "NendAdResource",
-            dependencies: [],
-            resources: [
-                .process("./NendAdResource.bundle")
+                .copy("FluctSDKResources.bundle"),
+                .copy("AppLovinSDKResources.bundle"),
+                .copy("NendAdResource.bundle")
             ]
         )
     ]
